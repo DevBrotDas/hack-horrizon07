@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Secure FIR Filing</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <h1>Secure FIR Filing</h1>
+    <form method="POST" enctype="multipart/form-data">
+      <label><input type="checkbox" name="anon"> File Anonymously</label><br />
+      <input type="text" name="name" placeholder="Full Name" />
+      <input type="email" name="email" placeholder="Email" />
+      <textarea name="description" placeholder="FIR Description"></textarea>
+      <input type="file" name="file" required />
+      <button type="submit">Submit FIR</button>
+    </form>
+  </div>
+</body>
+</html>

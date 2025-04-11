@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Online FIR Filing Platform</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Online FIR Filing Portal</h1>
+
+    <!-- Aadhaar OTP Verification -->
+    <section class="card">
+      <h2>Aadhaar OTP Verification</h2>
+      <input type="text" placeholder="Enter user name" />
+      <button>Send OTP</button>
+      <input type="text" placeholder="Enter password" />
+      <button>Verify OTP</button>
+    </section>
+
+    <!-- Anonymous or Identity Submission -->
+    <section class="card">
+      <h2>FIR Details</h2>
+      <label>
+        <input type="checkbox" /> File anonymously
+      </label>
+      <input type="text" placeholder="Full Name" />
+      <input type="email" placeholder="Email Address" />
+      <textarea placeholder="FIR Description"></textarea>
+      <input type="file" multiple />
+    </section>
+
+    <!-- Preview FIR -->
+    <section class="card">
+      <h2>Preview FIR</h2>
+      <button>Generate Preview</button>
+      <div class="preview-box">[Preview Will Appear Here]</div>
+    </section>
+
+    <!-- Case Tracking -->
+    <section class="card">
+      <h2>Track Your Case</h2>
+      <input type="text" placeholder="Enter FIR ID" />
+      <button>Track</button>
+      <div class="status-box">[Status Update]</div>
+    </section>
+
+    <!-- Appointment Booking -->
+    <section class="card">
+      <h2>Book Appointment for Verification</h2>
+      <input type="date" />
+      <input type="time" />
+      <button>Book Now</button>
+    </section>
+  </div>
+</body>
+</html>
