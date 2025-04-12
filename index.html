@@ -5,54 +5,126 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Online FIR Filing Platform</title>
   <link rel="stylesheet" href="style.css" />
+    <script>
+    async function submitFIR(event) {
+      event.preventDefault();
+      const formData = new FormData(event.target);
+      try {
+        const response = await fetch('/submit_fir', {
+          method: 'POST',
+          body: formData,
+        });
+        const result = await response.json();
+        alert('FIR submitted successfully! Case ID: ' + result.case_id);
+      } catch (error) {
+        alert('Error submitting FIR: ' + error.message);
+      }
+    }
+
+    async function trackFIR() {
+      const caseId = document.querySelector('input[placeholder="Enter FIR ID"]').value;
+      if (!caseId) {
+        alert('Please enter a FIR ID');
+        return;
+      }
+      
+      try {
+        const response = await fetch('/track_fir', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: `case_id=${encodeURIComponent(caseId)}`
+        });
+        const result = await response.json();
+        document.querySelector('.status-box').innerHTML = `
+          <strong>Status:</strong> ${result.status}<br>
+          <strong>Date:</strong> ${new Date(result.timestamp).toLocaleString()}
+        `;
+      } catch (error) {
+        alert('Error tracking FIR: ' + error.message);
+      }
+    }
+
+    async function bookAppointment() {
+      const date = document.querySelector('input[type="date"]').value;
+      const time = document.querySelector('input[type="time"]').value;
+      
+      if (!date || !time) {
+        alert('Please select both date and time');
+        return;
+      }
+
+      try {
+        const response = await fetch('/book_appointment', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: `date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}`
+        });
+        const result = await response.json();
+        alert('Appointment booked successfully!');
+      } catch (error) {
+        alert('Error booking appointment: ' + error.message);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const firForm = document.querySelector('form');
+      firForm.addEventListener('submit', submitFIR);
+      
+      document.querySelector('button:contains("Track")')
+        .addEventListener('click', trackFIR);
+        
+      document.querySelector('button:contains("Book Now")')
+        .addEventListener('click', bookAppointment);
+    });
+  </script>
 </head>
 <body>
   <div class="container">
     <h1>Online FIR Filing Portal</h1>
 
-    <!-- Aadhaar OTP Verification -->
-    <section class="card">
-      <h2>Aadhaar OTP Verification</h2>
-      <input type="text" placeholder="Enter user name" />
-      <button>Send OTP</button>
-      <input type="text" placeholder="Enter password" />
-      <button>Verify OTP</button>
-    </section>
+    <form>
+      <section class="card">
+        <h2> LOG IN </h2>
+        <input type="text" placeholder="Enter user name" />
+        <input type="text" placeholder="Enter password" />
+        <button type="submit">Verify</button>
+      </section>
 
-    <!-- Anonymous or Identity Submission -->
-    <section class="card">
-      <h2>FIR Details</h2>
-      <label>
-        <input type="checkbox" /> File anonymously
-      </label>
-      <input type="text" placeholder="Full Name" />
-      <input type="email" placeholder="Email Address" />
-      <textarea placeholder="FIR Description"></textarea>
-      <input type="file" multiple />
-    </section>
+      <section class="card">
+        <h2>FIR Details</h2>
+        <label>
+          <input type="checkbox" name="anonymous" /> File anonymously
+        </label>
+        <input type="text" name="name" placeholder="Full Name" />
+        <input type="email" name="email" placeholder="Email Address" />
+        <textarea name="description" placeholder="FIR Description"></textarea>
+        <input type="file" name="files" multiple />
+      </section>
 
-    <!-- Preview FIR -->
-    <section class="card">
-      <h2>Preview FIR</h2>
-      <button>Generate Preview</button>
-      <div class="preview-box">[Preview Will Appear Here]</div>
-    </section>
+      <section class="card">
+        <h2>Preview FIR</h2>
+        <button type="button">Generate Preview</button>
+        <div class="preview-box">[Preview Will Appear Here]</div>
+      </section>
 
-    <!-- Case Tracking -->
-    <section class="card">
-      <h2>Track Your Case</h2>
-      <input type="text" placeholder="Enter FIR ID" />
-      <button>Track</button>
-      <div class="status-box">[Status Update]</div>
-    </section>
+      <section class="card">
+        <h2>Track Your Case</h2>
+        <input type="text" placeholder="Enter FIR ID" />
+        <button type="button">Track</button>
+        <div class="status-box">[Status Update]</div>
+      </section>
 
-    <!-- Appointment Booking -->
-    <section class="card">
-      <h2>Book Appointment for Verification</h2>
-      <input type="date" />
-      <input type="time" />
-      <button>Book Now</button>
-    </section>
+      <section class="card">
+        <h2>Book Appointment for Verification</h2>
+        <input type="date" />
+        <input type="time" />
+        <button type="button">Book Now</button>
+      </section>
+    </form>
   </div>
 </body>
 </html>

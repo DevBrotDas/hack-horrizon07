@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header>
+         <h1>   Jharkhand police online portal </h1>
+            <h1>Welcome </h1> 
+            <a href="/logout" class="logout-btn">Logout</a>
+        </header>
+        
+        <div class="functions-container">
+            <h2>Available Functions</h2>
+            
+            <div class="function-card">
+                <h3>File New FIR</h3>
+                <p>Submit a new First Information Report</p>
+                <a href="/" class="function-btn">Go to FIR Form</a>
+            </div>
+            
+            <div class="function-card">
+                <h3>View Submitted FIRs</h3>
+                <p>Check status of your previous submissions</p>
+                <a href="#" class="function-btn">View FIRs</a>
+            </div>
+            
+            <div class="function-card">
+                <h3>Account Settings</h3>
+                <p>Update your account information</p>
+                <a href="#" class="function-btn">Settings</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

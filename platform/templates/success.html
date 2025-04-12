@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FIR Submission Successful</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>FIR Submitted Successfully</h1>
+        
+        <div class="success-details">
+            <h2>Your Case ID: <span class="case-id">{{ case_id }}</span></h2>
+            
+            <div class="detail-section">
+                <h3>Submission Details:</h3>
+                <p><strong>Name:</strong> {{ name }}</p>
+                <p><strong>Email:</strong> {{ email }}</p>
+                <p><strong>Description:</strong> {{ description }}</p>
+                {% if files %}
+                <p><strong>Attached Files:</strong></p>
+                <ul>
+                    {% for file in files %}
+                    <li>{{ file }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <p><strong>Submission Time:</strong> {{ timestamp }}</p>
+            </div>
+            
+            <div class="next-steps">
+                <h3>Next Steps:</h3>
+                <ol>
+                    <li>Save your Case ID for future reference</li>
+                    <li>You'll receive email updates about your case</li>
+                    <li>Check status anytime at our tracking portal</li>
+                </ol>
+            </div>
+            
+            <div class="action-buttons">
+                <a href="/dashboard" class="btn">Go to Dashboard</a>
+                <a href="/" class="btn">File Another FIR</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
